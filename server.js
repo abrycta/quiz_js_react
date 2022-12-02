@@ -5,8 +5,9 @@
 const express = require("express")
 const cors = require("cors")
 const app = express()
+const db = require("./model/db_model.js")
 
-var corsOptions = {
+let corsOptions = {
     origin: "http://localhost:3988"
 }
 

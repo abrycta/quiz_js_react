@@ -1,4 +1,4 @@
-const dbConfig = require('../config/db.config.js')
+const dbConfig = require('../config/db_config.js')
 const Sequelize = require("sequelize")
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER,
@@ -14,6 +14,8 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
+db.students = require('./student.js')(sequelize, Sequelize)
+
 module.exports = {
-    db,
+    db
 }

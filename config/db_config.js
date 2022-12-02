@@ -2,6 +2,6 @@ module.exports = {
     HOST: "localhost",
     USER: "root",
     PASSWORD: "",
-    DB: "testdb",
+    DB: "quiz_js",
     dialect: "mysql"
 }
