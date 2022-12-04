@@ -21,6 +21,9 @@ db.idnt_answer = require('./idnt_answer.js')(sequelize, Sequelize)
 db.idnt_qstn = require('./idnt_qstn.js')(sequelize, Sequelize)
 db.mlt_answr = require('./mlt_answr.js')(sequelize, Sequelize)
 db.mlt_qstn = require('./mlt_qstn.js')(sequelize, Sequelize)
+db.mlt_qst_choices = require('./mlt_qst_choices.js')(sequelize, Sequelize)
+db.mtch_qstn = require('./mtch_qstn.js')(sequelize, Sequelize)
+db.score = require('./score.js')(sequelize, Sequelize)
 
 // Access
 db.access.hasOne(db.students, {
@@ -40,6 +43,7 @@ db.activity.belongsTo(db.access)
 db.activity.belongsTo(db.idnt_answer)
 db.activity.belongsTo(db.idnt_qstn)
 db.activity.belongsTo(db.mlt_answr)
+db.activity.belongsTo(db.mtch_qstn)
 
 //
 
@@ -76,6 +80,25 @@ db.mlt_qstn.hasOne(db.activity, {
     foreignKey: 'act_id'
 })
 db.mlt_qstn.belongsTo(db.mlt_answr)
+db.mlt_qstn.belongsTo(db.mlt_qst_choices)
+
+// Mlt_qst_choices
+db.mlt_qst_choices.hasOne(db.mlt_qstn, {
+    foreignKey: 'mlt_qstn_id'
+})
+
+// Mtch_qstn
+db.mtch_qstn.hasOne(db.activity, {
+    foreignKey: 'act_id'
+})
+
+// Score
+db.score.hasOne(db.activity, {
+    foreignKey: 'act_id'
+})
+db.score.hasOne(db.students, {
+    foreignKey: 'stud_id'
+})
 
 module.exports = {
     db
