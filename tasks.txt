@@ -34,5 +34,5 @@ Student
         - Accomplished
         - Unaccomplished (locked)
     3. Quiz interface @Nudo
-        - Usually rendering shit, but with Bootstrap + MySQL and Express
+        - Usually rendering, but with Bootstrap + MySQL and Express
     
