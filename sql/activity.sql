@@ -6,3 +6,4 @@ create table activity
 )
     charset = utf8mb4;
 
+INSERT INTO quiz_js.activity (act_id, act_name) VALUES (1, 'software_engineering');
