@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false,
             primaryKey: true
         },
-        quiz_name: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
         }

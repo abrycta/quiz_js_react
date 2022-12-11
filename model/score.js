@@ -3,30 +3,30 @@ const sequelize = require("./db_model.js")
 
 module.exports = (sequelize, Sequelize) => {
     return sequelize.define('Score', {
-        act_id: {
+        score_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true
+        },
+        act_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
         },
         stud_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            primaryKey: true
         },
-        mlt_scr: {
+        idn_score: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            primaryKey: true
         },
-        id_scr: {
+        mlt_score: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            primaryKey: true
         },
-        mtch_scr: {
+        mtc_score: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            primaryKey: true
         }
     })
 }

@@ -14,91 +14,19 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.students = require('./student.js')(sequelize, Sequelize)
 db.access = require('./access.js')(sequelize, Sequelize)
 db.activity = require('./activity.js')(sequelize, Sequelize)
-db.idnt_answer = require('./idnt_answer.js')(sequelize, Sequelize)
-db.idnt_qstn = require('./idnt_qstn.js')(sequelize, Sequelize)
-db.mlt_answr = require('./mlt_answr.js')(sequelize, Sequelize)
-db.mlt_qstn = require('./mlt_qstn.js')(sequelize, Sequelize)
-db.mlt_qst_choices = require('./mlt_qst_choices.js')(sequelize, Sequelize)
-db.mtch_qstn = require('./mtch_qstn.js')(sequelize, Sequelize)
+db.ans_idn = require('./ans_idn.js')(sequelize, Sequelize)
+db.ans_mlt = require('./ans_mlt.js')(sequelize, Sequelize)
+db.ans_mtc = require('./ans_mtc.js')(sequelize, Sequelize)
+db.qst_idn = require('./qst_idn.js')(sequelize, Sequelize)
+db.qst_mlt = require('./qst_mlt.js')(sequelize, Sequelize)
+db.qst_mlt_choice = require('./qst_mlt_choice.js')(sequelize, Sequelize)
+db.qst_mtc = require('./qst_mtc.js')(sequelize, Sequelize)
+db.qst_mtc_left_col = require('./qst_mtc_left_col.js')(sequelize, Sequelize)
+db.qst_mtc_right_col = require('./qst_mtc_right_col.js')(sequelize, Sequelize)
 db.score = require('./score.js')(sequelize, Sequelize)
-
-// Access
-db.access.hasOne(db.students, {
-    foreignKey: 'stud_id'
-})
-db.access.hasOne(db.activity,{
-    foreignKey: 'act_id'
-})
-
-// Students
-db.students.belongsTo(db.access)
-db.students.belongsTo(db.idnt_answer)
-db.students.belongsTo(db.mlt_answr)
-
-// Activity
-db.activity.belongsTo(db.access)
-db.activity.belongsTo(db.idnt_answer)
-db.activity.belongsTo(db.idnt_qstn)
-db.activity.belongsTo(db.mlt_answr)
-db.activity.belongsTo(db.mtch_qstn)
-
-//
-
-// Idnt_answer
-db.idnt_answer.hasOne(db.activity,{
-    foreignKey: 'act_id'
-})
-db.idnt_answer.hasOne(db.students,{
-    foreignKey: 'stud_id'
-})
-db.idnt_answer.hasOne(db.idnt_qstn,{
-    foreignKey: 'idnt_qstn_id'
-})
-
-// Idnt_qstn
-db.idnt_qstn.hasOne(db.activity, {
-    foreignKey: 'act_id'
-})
-db.activity.belongsTo(db.idnt_answer)
-
-// Mlt_answer
-db.mlt_answr.hasOne(db.activity, {
-    foreignKey: 'act_id'
-})
-db.mlt_answr.hasOne(db.students, {
-    foreignKey: 'stud_id'
-})
-db.mlt_answr.hasOne(db.mlt_qstn, {
-    foreignKey: 'mlt_qstn_id'
-})
-
-// Mlt_qstn
-db.mlt_qstn.hasOne(db.activity, {
-    foreignKey: 'act_id'
-})
-db.mlt_qstn.belongsTo(db.mlt_answr)
-db.mlt_qstn.belongsTo(db.mlt_qst_choices)
-
-// Mlt_qst_choices
-db.mlt_qst_choices.hasOne(db.mlt_qstn, {
-    foreignKey: 'mlt_qstn_id'
-})
-
-// Mtch_qstn
-db.mtch_qstn.hasOne(db.activity, {
-    foreignKey: 'act_id'
-})
-
-// Score
-db.score.hasOne(db.activity, {
-    foreignKey: 'act_id'
-})
-db.score.hasOne(db.students, {
-    foreignKey: 'stud_id'
-})
+db.students = require('./student.js')(sequelize, Sequelize)
 
 module.exports = {
     db

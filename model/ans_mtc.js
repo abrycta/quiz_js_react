@@ -2,26 +2,26 @@ const { DataTypes, Sequelize} = require("sequelize")
 const sequelize = require("./db_model.js")
 
 module.exports = (sequelize, Sequelize) => {
-    return sequelize.define('Access', {
-        access_id: {
+    return sequelize.define('Ans_mtc', {
+        ans_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true
         },
+        mtc_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        left_index: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        right_index: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
         stud_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        act_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        date_taken: {
-            type: DataTypes.DATE,
-            allowNull: false,
-        },
-        date_open: {
-            type: DataTypes.DATE,
             allowNull: false,
         },
     })
