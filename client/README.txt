@@ -3,7 +3,8 @@ cd client
 npm install
 
 
-next
+next, to enable client connection to server:
+
 go to server readme first
 if server is ready,
 open another terminal
