@@ -2,4 +2,4 @@ cd server
 npm install
 
 npm start
-then go to readme client
+then go to readme client 
