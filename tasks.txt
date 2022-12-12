@@ -1,0 +1,38 @@
+Notes
+    1. Use bootstrap and react for the UI
+    2. MySQL and Express shall be used for the backend
+    3. For each interface (e.g. Home, student list, quiz management), the people assigned to it will be responsible for:
+        1. UI design
+        2. UI generation
+        3. MySQL operation
+Admin
+    1. Home (feed) @Ancheta @Castro
+        - Similar to the google classroom home feed
+        - Allow a teacher to make an announcement
+        - Show lists of old announcements and "posted" quizzes
+    2. Student List @Bonifacio @Ancheta
+        - Show list of students, and
+        - For each student entry:
+            - Show which quizzes have been taken and the accompanying score
+            - Show which quizzes have not been taken yet
+            - Student management
+                - For that student, allows for changing of the access for a specific quiz
+    3. Quiz Management @Bustarde @Bonifacio
+        - Show list of quizzes
+        - For each quiz entry:
+            - Edit this quiz (manage questions and answers)
+            - Delete this quiz
+            - Authorize/Deauthorize students to take the quiz
+        - Create a quiz
+
+Student
+    1. Home feed @Castro @Garrido
+        - Similar to the Google Classroom feed
+        - View lists of announcements made by the teacher
+        - Show "posted" quiz
+    2. To do @Garrido @Ramirez
+        - Accomplished
+        - Unaccomplished (locked)
+    3. Quiz interface @Nudo
+        - Usually rendering, but with Bootstrap + MySQL and Express
+    
