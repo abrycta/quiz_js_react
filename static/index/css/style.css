@@ -1,7 +1,7 @@
 
 @font-face {
     font-family: "clearsans";
-    src: url("static/index/fonts/clearsans.ttf") format("truetype");
+    src: url("../../../static/index/fonts/clearsans.ttf") format("truetype");
 }
 
 
@@ -479,8 +479,8 @@ body{
     border: none;
     border-bottom: 1px solid rgb(0, 132, 223);
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
@@ -498,7 +498,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .answer-key-title, .feedback-title{
     margin: 0;
-    font-family: "Roboto Condensed";
+    font-family: "clearsans";
     display: inline-block;
 }
 
@@ -562,7 +562,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .feedback-title{
-    font-family: "Poppins";
+    font-family: "clearsans";
     font-size: 1.1rem;
     font-weight: normal;
 }
@@ -582,7 +582,7 @@ input[type=number]::-webkit-outer-spin-button {
     display: block;
     overflow: hidden;
 }
-  
+
 .input-animate {
     width: -webkit-fill-available;
     width: -moz-available;
@@ -594,7 +594,7 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: transparent;
     border-bottom: 1px solid #7c7c7c;
 }
-  
+
 .input-onFocus {
     transition: all 0.5s;
     display: inline-block;
@@ -605,11 +605,11 @@ input[type=number]::-webkit-outer-spin-button {
     height: 2px;
     background: #1a73e8;
 }
-  
+
 .form-animate, .input-animate {
     color: inherit;
 }
-  
+
 .form-animate .input-animate:focus + .input-onFocus {
     left: 0;
 }
@@ -634,7 +634,7 @@ blockquote{
     position: relative;
     background:#EDEDED;
 }
-  
+
 blockquote span{
     display:block;
     color:#333333;
