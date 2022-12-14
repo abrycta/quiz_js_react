@@ -1,0 +1,67 @@
+{% extends 'index/layout.html' %}
+{% load static %}
+{% block script %}
+<script src = "{% static 'index/js/index.js' %}" defer></script>
+<script src="{% static 'lib/cookie.min.js' %}" defer></script>
+{% endblock %}
+{% load static %}
+{% block body %}
+<div class="container-fluid">
+
+    <div class="create-form">
+        <div class="container">
+            <a href="{% url 'logout' %}">
+
+                <img src = "{% static 'res/Logout.jpg' %}" alt = "Logout Icon" class="navbar-icon logout-icon float-right" title = "Logout">
+            </a>
+
+            {% if user.is_superuser %}
+                <h1>Teacher Admin</h1>
+            {% else %}
+                <h1>Student Page</h1>
+            {% endif %}
+
+            <br>
+        </div>
+
+        {% if user.is_superuser %}
+
+        <div class="container">
+            <p class="forms-label">Create a New Exam</p>
+            <div class="form-template-box">
+                <span class="form-template-label">New Exam</span>
+                <img src = "{% static 'res/blank-form.png' %}" alt = "Create Exam" title = "Create Exam" id="create-blank-form">
+            </div>
+
+        </div>
+        {% else %}
+
+        {% endif %}
+        <div class="container">
+            <div class="exam-list">
+            <p class="forms-label">List of Exams:</p>
+            {% for i in forms %}
+                {% if user.is_superuser %}
+                    <a href = "{% url 'exam_edit' i.code %}" class="form-list-link">
+                {% else %}
+                    <a href = "http://{{request.get_host}}/exam/{{i.code}}/viewform" class="form-list-link">
+                {% endif %}
+
+                    <div class="form-box">
+                        <div class="form-list-title"><h5 class="form-list-title-text">{{i.title}}</h5></div>
+                        {% if i.createdAt == i.updatedAt %}
+                        <p class="form-list-timestamp">{{i.createdAt}}</p>
+                        {% else %}
+                        <p class="form-list-timestamp">{{i.updatedAt}}</p>
+                        {% endif %}
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+        </div>
+
+
+
+    </div>
+</div>
+{% endblock %}

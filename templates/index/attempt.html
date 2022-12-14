@@ -1,0 +1,75 @@
+{% extends 'index/layout.html' %}
+{% load static %}
+{% load get_response %}
+{% load to_int %}
+{% load is_response %}
+{% load answer %}
+{% block script %}
+{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="container">
+
+        <div class="margin-top-bottom box question-box">
+            <div class="form-title-box">
+                <h1 class="form-title txtClr">{{ exam.title}}</h1>
+                {% if exam.is_quiz %}
+                <h4 class="answer-title">answer: {{answer}} / {{total_answer}}</h4>
+                {% endif %}
+                <p class="required-info">* Required</p>
+            </div>
+            <div class="form-description txtClr">{{ exam.description|linebreaksbr}}</div>
+        </div>
+        {% if exam.collect_email %}
+        <div class="margin-top-bottom box question-box">
+            <h1 class="question-title txtClr">Email address: <span class="require-star">*</span></h1>
+            <p class="short-answer">{{attempt.student_email }}</p>
+        </div>
+        {% endif %}
+        {% for question in exam.questions.all %}
+        <div class="margin-top-bottom box question-box">
+            <h1 class="attempt-title txtClr">{{question.question}} {% if question.required %}<span class="require-star">*</span>{% endif %}
+            {% if exam.is_quiz %}<span class="float-right">{{attempt|answer:question.pk}} / {{question.answer}}</span>{% endif %}</h1>
+            {% if question.question_type == "short" %}
+                <p class="short-answer">{{attempt|get_response:question.pk}}</p>
+            {% elif question.question_type == "paragraph" %}
+                <p class="long-answer">{{attempt|get_response:question.pk|linebreaksbr}}</p>
+            {% elif question.question_type == "multiple choice" %}
+                {% for choice in question.choices.all %}
+                <div class="multiple-choice">
+                    {% if attempt|get_response:question.pk|to_int == choice.pk|to_int %}
+                        <input type="radio" name="{{question.id}}" id="{{choice.id}}" checked>
+                    {% else %}
+                        <input type="radio" name="{{question.id}}" id="{{choice.id}}" disabled>
+                    {% endif %}
+                    <label for="{{choice.id}}" class="txtClr">{{choice.choice}}</label>
+                </div>
+                {% endfor %}
+            {% elif question.question_type == "checkbox" %}
+                {% for choice in question.choices.all %}
+                <div class="multiple-choice">
+                    {% if attempt|get_attempts:question.pk|is_response:choice.pk %}
+                        <input type="checkbox" name="{{question.id}}" id="{{choice.id}}" value="{{choice.id}}" checked onclick="return false">
+                    {% else %}
+                        <input type="checkbox" name="{{question.id}}" id="{{choice.id}}" value="{{choice.id}}" disabled>
+                    {% endif %}
+                    <label for="{{choice.id}}" class="txtClr">{{choice.choice}}</label>
+                </div>
+                {% endfor %}
+            {% endif %}
+            {% if user != exam.creator and question.feedback != None and question.feedback != "" %}
+                <div class="feedback">
+                    <h5 class="feedback-title">Feedback:</h5>
+                    <p class="text-label long-answer">{{question.feedback|linebreaksbr|urlize}}</p>
+                </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% if user == exam.creator %}
+        <a href="{% url 'exam_edit' exam.code %}">
+            <img src="{% static 'res/back.png' %}" alt="Edit Question" title="Edit this form" class="edit-form-link">
+        </a>
+    {% endif %}
+</div>
+{% endblock %}

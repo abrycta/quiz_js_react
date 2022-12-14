@@ -1,0 +1,22 @@
+{% extends 'index/layout.html' %}
+{% load static %}
+{% block script %}
+<script src="{% static 'index/js/viewform.js' %}" defer></script>
+{% endblock %}
+{% block body %}
+<div class="container">
+
+    <div class="margin-top-bottom box box-shadow bg-white">
+        <h1 class="form-title txtClr">{{ exam.title}}</h1>
+        <p class="text-label margin-left-right" style="margin-left: 10px;">{{ exam.confirmation_message}}</p>
+        {% if exam.edit_after_submit %}
+        <a href="{% url 'edit_response' exam.code code %}" class="edit-attempt-link">Edit attempt</a>
+        {% endif %}
+        {% if exam.is_quiz and exam.allow_view_answer %}
+        <div class="modal-division">
+            <a href="{% url 'attempt' exam.code code %}" class="btn view-answer-btn">View answer</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'index/layout.html' %}
+{% load static %}
+{% load get_response %}
+{% load to_int %}
+{% load is_response %}
+{% block title %}{{ exam.title}}{% endblock %}
+{% block script %}
+<script src="{% static 'index/js/viewform.js' %}" defer></script>
+{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <form class="container" method="POST" action="{% url 'edit_response' exam.code attempt.attempt_code %}" autocomplete="off">
+        {% csrf_token %}
+        <div class="margin-top-bottom box question-box">
+            <div class="form-title-box">
+                <h1 class="form-title txtClr">{{ exam.title}}</h1>
+                <p class="required-info">* Required</p>
+            </div>
+            <div class="form-description txtClr">{{ exam.description|linebreaksbr}}</div>
+        </div>
+        {% if exam.collect_email %}
+        <div class="margin-top-bottom box question-box">
+            <h1 class="question-title txtClr">Email address: <span class="require-star">*</span></h1>
+            <input type="email" name="email-address" class="short-answer" placeholder="Your email address" required value="{{attempt.student_email }}">
+        </div>
+        {% endif %}
+        {% for question in exam.questions.all %}
+        <div class="margin-top-bottom box question-box">
+            {% if exam.is_quiz %}
+            <h1 class="question-title txtClr">{{question.question}} {% if question.required %}<span class="require-star">*</span>{% endif %}</h1>
+            {% else %}
+            <h1 class="question-title txtClr" oncopy = "return false">{{question.question}} {% if question.required %}<span class="require-star">*</span>{% endif %}</h1>
+            {% endif %}
+            {% if question.question_type == "short" %}
+                <input type="text" name="{{question.id}}" class="short-answer" placeholder = "Your answer" {% if question.required %} required {% endif %}
+                value="{{attempt|get_response:question.pk}}">
+            {% elif question.question_type == "paragraph" %}
+                <textarea name="{{question.id}}" placeholder="Your answer" class="long-answer textarea-adjust" 
+                {% if question.required %} required {% endif %}>{{attempt|get_response:question.pk}}</textarea>
+            {% elif question.question_type == "multiple choice" %}
+                {% for choice in question.choices.all %}
+                <div class="multiple-choice">
+                    {% if attempt|get_response:question.pk|to_int == choice.pk|to_int %}
+                    <input type="radio" name="{{question.id}}" id="{{choice.id}}" {% if question.required %} required {% endif %} value="{{choice.id}}" checked>
+                    {% else %}
+                    <input type="radio" name="{{question.id}}" id="{{choice.id}}" {% if question.required %} required {% endif %} value="{{choice.id}}">
+                    {% endif %}
+                    <label for="{{choice.id}}" class="txtClr">{{choice.choice}}</label>
+                </div>
+                {% endfor %}
+            {% elif question.question_type == "checkbox" %}
+            {% for choice in question.choices.all %}
+                <div class="multiple-choice">
+                    {% if attempt|get_attempts:question.pk|is_response:choice.pk %}
+                    <input type="checkbox" name="{{question.id}}" id="{{choice.id}}" {% if question.required %} required {% endif %} value="{{choice.id}}" checked>
+                    {% else %}
+                    <input type="checkbox" name="{{question.id}}" id="{{choice.id}}" {% if question.required %} required {% endif %} value="{{choice.id}}">
+                    {% endif %}
+                    <label for="{{choice.id}}" class="txtClr">{{choice.choice}}</label>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+        <div class="margin-top-bottom">
+            <input type="submit" value="Submit" class="btn btn-submit">
+        </div>
+    </form>
+    {% if user == exam.creator %}
+        <a href="{% url 'exam_edit' exam.code %}">
+            <img src="{% static 'res/back.png' %}" alt="Edit Question" title="Edit this form" class="edit-form-link">
+        </a>
+    {% endif %}
+</div>
+{% endblock %}
