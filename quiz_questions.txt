@@ -1,0 +1,83 @@
+A. Identification
+  1. 
+  Description of what services that system is expected to provide and the constraints under which it must operate.
+    User requirements
+  2.
+  Detailed information about the system functions, services and operational constraints that are to be implemented.
+    System requirements
+  3.
+  Statements of the services that a system should provide, how the system should react to particular input and how the system should behave in particular situations.
+    Functional requirements
+  4.
+  Creation of a simple working model of system to show users what requirements may look like when implemented.
+    Throwaway prototyping
+  5.
+  Its main goal is to build a very robust prototype in a structured manner and constantly refine it.
+    Evolutionary prototyping
+  
+B. Multiple Choice
+  1.
+  Which is not a type of prototyping?
+    Wizard of Oz
+    Paper
+    Documentation
+    Mockup
+  answer: Documentation
+  2.
+  Which is not a key design issue?
+    Distribution
+    Error handling
+    Interface
+    Persistence of Data
+  answer: Interface
+  3.
+  Which is not a design process?
+    Interface design
+    Algorithm design
+    Data design
+    Integration design
+  answer: Integration Design
+  4.
+  Organizes a system into layers, each of which provide a set of services.
+    Layered
+    Repository
+    Pipe and filter
+    Blackboard
+  answer: Layered
+  5.
+  Makes applications easily adapt to changing technologies and integrate with other applications.
+    CORBA
+    RPC
+    SOA
+    REST
+  answer: SOA
+  
+C. Check-Box
+  1.
+  Which of the following are types of prototyping? Select all that may apply.
+            a: "Wizard of Oz
+            b: "Paper
+            c: "Documentation
+            d: "Mockup
+            answer: a, b, d
+  2.
+  Which of the following are key design issues? Select all that may apply.
+            a: "Distribution
+            b: "Error handling
+            c: "Interface
+            d: "Persistence of Data
+            answer: a, b, d
+  3.
+  Which of the following are design processes? Select all that may apply.
+            a: Interface design
+            b: Algorithm design
+            c: Data design
+            d: Integration design
+            answer: a, b, c
+  
+  
+  
+  
+  
+  
+  
